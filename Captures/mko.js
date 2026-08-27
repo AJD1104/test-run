@@ -1,0 +1,275 @@
+const canvas = document.getElementById('game');
+const ctx =canvas.getContext('2d');
+const levelel = document.getElementById('level');
+const scoreEl =document.getElementById('score');
+
+function createSpriteSheet() {
+    const spritecanvas = document.createElement('canvas');
+    spritecanvas.width =128; // 4 frames*32px
+    spritecanvas.height =64;
+    const sctx = spritecanvas.getContext('2d');
+
+    for(let i=0; i<4; i++){
+        sctx.fillStyle = '#e74c3c'; 
+        sctx.fillRect(i*32+10, 8, 12, 16);
+        sctx.fillStyle ='#f39c12';
+        sctx.beginPath();
+         sctx.arc(i*32 + 16, 6, 6, 0, Math.PI*2);
+         sctx.fill()
+
+        sctx.fillStyle = '#c0392b';
+        let legoffset = (i % 2 === 0)? 2 :-2;
+        sctx.fillRect(i*32 + 12 + legoffset, 24, 4, 6);
+        sctx.fillRect(i*32 + 18 - legoffset, 24, 4, 6);
+    }
+
+    sctx.fillStyle ='#e74c3c';
+    sctx.fillRect(10, 40, 12, 16);
+    sctx.fillStyle = '#f39c12';
+    sctx.beginPath();
+    sctx.arc(16, 38, 6, 0, Math.PI*2);
+    sctx.fill();
+    sctx.fillStyle = '#c0392d'
+    sctx.fillRect(12, 56, 4, 6);
+    sctx.fillRect(18, 56, 4, 6);
+    
+    return spritecanvas;
+
+}
+ 
+const spritesheet = createSpriteSheet();
+
+const player = {
+    x: 50, y:100, width: 32, height: 32,
+    vx: 0, vy: 0, speed: 5, jumpPower: -13,
+    onGround: false, faceing: 'right',
+    frame: 0, frametimer: 0,
+};
+ 
+const gravity = 0.6;
+const friction = 0.85;
+let currentLevel = 0;
+let totalCoins = 0;
+let collectedCoins = 0;
+let gameWon = false;
+const keys = {};
+
+
+const levels = [
+    {
+        platforms: [
+            {x: 0, y: 460, width: 800, height: 40},
+            {x: 150, y: 400, width:100, height: 20},
+            {x: 350, y: 340, width:100, height: 20},
+            {x: 550, y: 280, width:100, height: 20},
+        ],
+        coins: [
+            {x: 180, y: 370, }, {x: 380, y: 310, }, {x: 580, y:250 , },
+        ],
+        goal: {x: 720, y: 420, width:40, height: 40},
+    },
+    {
+        platforms: [
+            {x: 0, y: 460, width: 800, height: 40},
+            {x: 100, y: 400, width: 80, height: 20},
+            {x: 250, y: 350, width: 80, height: 20},
+            {x: 400, y: 300, width: 80, height: 20},
+            {x: 550, y: 250, width: 80, height: 20},
+        ],
+        coins: [
+            {x: 120, y: 370, }, {x: 270, y: 320}, {x: 420, y: 270},  {x: 570, y: 220},
+        ],
+        goal: {x: 720, y: 420, width:40, height: 40},
+    },
+    {
+        platforms: [
+            {x: 0, y: 460, width: 300, height: 40},
+            {x: 500, y: 460, width: 300, height: 40},
+            {x: 200, y: 400, width: 100, height: 20},
+            {x: 400, y: 340, width: 100, height: 20},
+            {x: 600, y: 280, width: 100, height: 20},
+        ],
+        coins: [
+            {x: 230, y: 370, }, {x: 430, y: 310}, {x: 630, y: 250},  
+        ],
+        goal: {x: 720, y: 240, width:40, height: 40},
+    }
+];
+let platforms = [];
+let coins = [];
+let goal = {};
+document.addEventListener('keydown', e => keys[e.code] = true );
+document.addEventListener('keyup', e => keys[e.code] = false);
+
+function loadLevel(n) {
+    platforms = levels[n].platforms;
+    coins = levels[n].coins.map(c => ({...c, collected: false}));
+    goal = levels[n].goal
+    totalCoins = coins.length;
+    player.x = 50;
+    player.y = 400;
+    player.vx = 0;
+    player.vy = 0;
+    currentLevel = n;
+    levelel.textContent = n + 1;
+    scoreEl.textContent = '${collectedCoins}/${totalCoins}'
+}
+function rectcollision(a, b) {
+    return a.x < b.x + b.width &&
+           a.x + a.width > b.x &&
+           a.y < b.y + b.height &&
+           a.y + a.height > b.y;
+}
+function update() {
+    if (gameWon) return;
+
+    //control
+    let moving = false;
+    if (keys['ArrowRight']) {
+        player.vx = player.speed;
+        player.faceing = 'right';
+        moving = true;
+    } else if (keys['ArrowLeft']) {
+        player.vx = -player.speed;
+        player.faceing = 'left';
+        moving = true;
+    } else{
+        player.vx *= friction;
+    }
+    
+    if (keys['Space'] && player.onGround){
+        player.vy = player.jumpPower;
+        player.onGround = false;
+    }
+
+
+    player.frametimer++;
+    if(moving && player.onGround && player.frametimer > 8) {
+        player.frame = (player.frame + 1) % 4; // cycle 0-3
+        player.frametimer = 0;
+    }
+    if(!player.onGround) player.frame = 4;
+    if(!moving && player.onGround)player.frame = 0;
+
+
+    player.vy += gravity;
+    player.x += player.vx;
+    player.y += player.vy;
+
+    player.onGround = false;
+    platforms.forEach(p => {
+        if (rectcollision(player, p)){
+            if (player.vy > 0) {
+                player.y = p.y - player.height;
+                player.vy = 0;
+                player.onGround = true;
+            }
+        }
+    });
+
+
+    coins.forEach(c => {
+        if (!c.collected && rectcollision(player, {x:c.x, y:c.y, width:20, height:20})){
+            c.collected = true;
+            collectedCoins++;
+            scoreEl.textContent = `${collectedCoins}/${totalConins}`;
+        }
+    });
+    if(rectcollision(player, goal)) {
+        const allCoins = coins.every(c => c.collected);
+        if(allCoins) {
+            if(currentLevel < levels.length - 1) {
+                loadLevel(currentLevel + 1);
+            }else {
+                gameWon = true;
+            }
+        }
+    }
+     
+    if (player.y > canvas.height) {
+        loadLevel(currentLevel);
+    }
+
+    if (player.x < 0)player.x = 0;
+    if (player.x + player.width > canvas.width)player.x = canvas. width - player. width;
+}
+
+function drawSprite() {
+    const frameWidth = 32;
+    const frameHeight = 32;
+    const sx = (player.frame % 4) * frameWidth;
+    const sy = player.frame === 4? frameHeight : 0;
+
+    ctx.save();
+    if (player.faceing === 'left') {
+        ctx.translate(player.x + player.width, player.y);
+        ctx.scale(-1, 1);
+        ctx.drawImage(spritesheet, sx, sy, frameWidth, frameHeight, 0, 0, player.width, player.height);
+    } else {
+        ctx.drawImage(spritesheet, sx, sy, frameWidth, frameHeight, player.x, player.y, player.width, player.height);
+    }
+    ctx.restore();
+}
+    
+function draw() {
+    //sky
+    ctx.fillStyle = '#87CEEB';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    //clouds
+    ctx.fillStyle = 'rgba(255,255,255,0.8)';
+    ctx.beginPath();
+    ctx.arc(100, 80, 30, 0, Math.PI*2);
+    ctx.arc(130, 80, 40, 0, Math.PI*2);
+    ctx.arc(160, 80, 30, 0, Math.PI*2);
+    ctx.fill();
+
+
+    ctx.fillStyle = '#27ae60'
+    platforms.forEach(p => {
+        ctx.fillRect(p.x, p.y, p.width, p.height);
+        ctx. fillStyle = '#2ecc71';
+        ctx.fillRect(p.x, p.y, p.width, 5);
+        ctx.fillStyle = '#27ae60';
+    });
+
+    coins.forEach(c => {
+        if (!c.collected){
+            ctx.beginPath();
+            ctx.arc(c.x + 10, c.y +10, 10, 0, Math.PI*2);
+            ctx.fillStyle = '#f1c40f';
+            ctx.fill();
+            ctx.fillStyle = '#fff';
+            ctx.beginPath();
+            ctx.arc(c.x + 6, c.y +6, 3, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    });
+
+    ctx.fillStyle = '#8e44ad';
+    ctx.fillRect = (goal.x, goal.y, goal.width, goal.height);
+    ctx.fillStyle = '#fff';
+    ctx.font = '12px Arial';
+    ctx. fillText('EXIT', goal.x + 5, goal.y + 25);
+
+    drawSprite();
+
+    if(gameWon) {
+        ctx.fillStyle = 'rgba(0,0,0,0.8)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#2ecc71';
+        ctx.font = '48px Arial';
+        ctx.fillText('YOU WIN!', 300, 250);
+        ctx.font = '24px Arial';
+        ctx.fillText('ALL Coins collected!', 290, 300,);    
+    }
+}
+function gameloop() {
+    update();
+    draw();
+    requestAnimationFrame(gameloop);
+}
+
+loadLevel(0);
+gameloop();
+    

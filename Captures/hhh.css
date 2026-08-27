@@ -1,0 +1,56 @@
+body{
+    text-align: center;
+    background-image: url(moon.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    font-family: arial;
+    
+}
+header{
+    color: gold;
+    background-color: slategrey;
+    font-size: 30px;
+    text-decoration: underline;
+    text-align: center;
+    font-family: ARIAL;
+position: sticky;
+top: 0%;
+}
+header h1{
+    border:8px solid goldenrod;
+    padding: 6px 12px;
+    border-radius: 36px;
+}
+ol{
+    white-space: nowrap;
+    max-width: 1200px;
+    margin: 0 auto ;
+}
+ol  li button {
+    display: inline-block;
+    text-decoration: none;
+    text-transform: capitalize;
+    border-radius: 45px;
+    border: 100px;
+    padding: 8px;
+}
+li a{
+    text-decoration: none;
+    color: black;
+    
+}
+ button a{
+    display: inline-table;
+}
+li a:hover{
+    text-decoration: underline;
+    background-color: lightblue;
+    opacity: 75%;
+    text-shadow: wheat;
+    cursor: grabbing;
+    transition: 4s;
+}

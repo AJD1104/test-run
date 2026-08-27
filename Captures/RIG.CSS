@@ -1,0 +1,109 @@
+body, ul, ol, h1, a{
+    margin: 0;
+    padding: 0;
+    font-family: arial;
+    background-image: url(c:\Users\PC\Pictures\vlcsnap-2026-07-23-21h41m26s429.png);
+    background-size: cover;
+}
+/*body{
+   background-image: url(c:\Users\PC\Pictures\vlcsnap-2026-07-23-21h41m26s429.png);
+    background-size: cover;
+    
+}*/
+header{
+    color: gold;
+    background-color: slategrey;
+    font-size: 50px;
+    text-decoration: underline;
+    text-align: center;
+    font-family: ARIAL;
+position: sticky;
+top: 0%;
+}
+header h1{
+    border:8px solid goldenrod;
+    padding: 6px 12px;
+    border-radius: 36px;
+}
+div1 li banner{
+    text-align: right;
+}
+banner{
+    background-color: #fe8614;
+    color: wheat;
+    padding: 30%;
+    position: absolute;
+    left: 0%;
+    top: 30%;
+}
+welcome{
+    font-size: 74px;
+
+}
+P{
+    text-align: left;
+    line-height: 15px;
+    letter-spacing: 1px;
+}
+ul{
+    white-space: nowrap;
+    max-width: 1200px;
+    margin: 0 auto ;
+}
+ 
+
+main{
+    max-width: 100%;
+    width: 1200px;
+    margin: 80px auto;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+ li a:hover{
+    text-decoration: underline;
+    background-color: darkred;
+    text-shadow: wheat;
+    cursor: pointer;
+    transition: 4s;
+}
+ ol{
+    white-space: nowrap;
+    background-color: black;
+    max-width: 1200px;
+    margin: 0 auto;
+    
+}
+ ol li{
+    width: 25%;
+    display: inline-block;
+    font-size: 24px;
+    text-decoration: none;
+    color: white;
+    background-color: black;
+
+   
+
+}
+footer{
+    font-size: 50px;
+    background: red;
+    color: white;
+    padding: 30px;
+    text-align: center;
+     bottom:0% ;
+     
+}
+main p{
+    font-size: 20px;
+    background-color: forestgreen;
+    color: #fe8614;
+    padding: 25px;
+    letter-spacing: 3px;
+    
+
+
+}
+
+
+

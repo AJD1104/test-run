@@ -1,0 +1,39 @@
+body
+h1{
+    color: gold;
+    background-color: slategrey;
+    font-size: 50px;
+    text-decoration: underline;
+    text-align: center;
+    font-family: ARIAL;
+    position: sticky;
+    top: 0%;
+}
+form input{
+    margin: 20px 0;
+    padding: 10px 20px;
+    font-size: 24px;
+    border-radius: 28px;
+    border: 4px solid wheat;
+}
+form label{
+    font-family: ARIAL;
+}
+footer{
+    background: red;
+    color: white;
+    padding: 10px;
+    text-align: center;
+     bottom:0% ;
+     
+}
+button{
+    border: 50px;
+    border-radius: 100px;
+    padding: 7px;
+}
+button:hover{
+    text-decoration: underline;
+    background-color: #3a0617;
+}
+
