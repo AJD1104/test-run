@@ -31,7 +31,7 @@ window.onload = function() {
     };
 
     // Use a separate EmailJS template to send the code
-    emailjs.send("YOUR_SERVICE_ID", "YOUR_CODE_TEMPLATE_ID", codeParams)
+    emailjs.send("service_76igk3f", "template_juprsho", codeParams)
       .then(function() {
         alert("Verification code sent to " + userEmail);
       }, function(error) {
