@@ -42,7 +42,6 @@ window.onload = function() {
   footer: "<a href=\"#\">Why do I have this issue?</a>"
 });
            }
-      }
       });
   });
 };
