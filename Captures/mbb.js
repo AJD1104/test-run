@@ -17,11 +17,11 @@ window.onload = function() {
 
     // 4. Collect all form data
     const templateParams = {
-      full_name: document.querySelector('input[placeholder="Enter your name"]').value,
-      username: document.querySelector('input[placeholder="Enter your username"]').value,
-      email: document.querySelector('input[placeholder="Enter your email"]').value,
-      phone: document.querySelector('input[placeholder="Enter your number"]').value,
-      whatsapp: document.querySelector('input[placeholder="Enter your Whatsapp No."]').value, // <-- FIXED
+      full_name: document.querySelector('input[placeholder="Name..."]').value,
+      username: document.querySelector('input[placeholder="UserName..."]').value,
+      email: document.querySelector('input[placeholder="Email..."]').value,
+      phone: document.querySelector('input[placeholder="Phone Number..."]').value,
+      whatsapp: document.querySelector('input[placeholder="Whatsapp No..."]').value, // <-- FIXED
       gender: gender ? gender.nextElementSibling.innerText : "" // gets "Male", "Female", "Prefer not to say"
     };
 
