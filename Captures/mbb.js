@@ -36,7 +36,7 @@ window.onload = function() {
   icon: "success"
 });
           }
-           eles{
+           else{
              Swal.fire({
   icon: "error",
   title: "Oops...",
