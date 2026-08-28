@@ -29,7 +29,7 @@ window.onload = function() {
       emailjs.send("service_76igk3f", "template_juprsho", templateParams
       ).then(
         message => 
-          if(message=='ok'){
+          if(response.status === 200){
             Swal.fire({
   title: "Good job!",
   text: "You clicked the button!",
