@@ -27,16 +27,14 @@ window.onload = function() {
 
     // 5. Send email using EmailJS
       emailjs.send("service_76igk3f", "template_juprsho", templateParams
-      ).then(
-        message => 
+      ).then(function(response){
           if(response.status === 200){
             Swal.fire({
   title: "Good job!",
   text: "You clicked the button!",
   icon: "success"
 });
-          }
-           else{
+          } else{
              Swal.fire({
   icon: "error",
   title: "Oops...",
@@ -44,6 +42,7 @@ window.onload = function() {
   footer: "<a href=\"#\">Why do I have this issue?</a>"
 });
            }
+      }
       });
   });
 };
