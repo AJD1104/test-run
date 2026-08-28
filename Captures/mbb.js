@@ -30,10 +30,19 @@ window.onload = function() {
       ).then(
         message => 
           if(message=='ok'){
-             swal("Secussfull", "You cliked the button!", "success");
+            Swal.fire({
+  title: "Good job!",
+  text: "You clicked the button!",
+  icon: "success"
+});
           }
            eles{
-              swal("Error", "You cliked the button!", "error");
+             Swal.fire({
+  icon: "error",
+  title: "Oops...",
+  text: "Something went wrong!",
+  footer: "<a href=\"#\">Why do I have this issue?</a>"
+});
            }
       });
   });
