@@ -10,6 +10,7 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    animation: need 5s linear infinite; 
     
 
 
@@ -19,6 +20,11 @@ body{
     align-items: center;
     padding: 10px;
      
+}
+@keyframes  need{
+    100%{
+        filter: hue-rotate(360deg);
+    }
 }
 .container{
     max-width: 700px;
