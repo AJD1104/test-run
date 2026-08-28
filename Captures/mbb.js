@@ -27,13 +27,14 @@ window.onload = function() {
 
     // 5. Send email using EmailJS
       emailjs.send("service_76igk3f", "template_juprsho", templateParams
-      ).then(function(response) {
-        alert("Registration submitted successfully!");
-        form.reset(); // clear form
-        console.log("SUCCESS!", response.status, response.text);
-      }, function(error) {
-        alert("Failed to submit. Check console for details.");
-        console.error("FAILED...", error);
+      ).then(
+        message => 
+          if(message=='ok'){
+             swal("Secussfull", "You cliked the button!", "success");
+          }
+           eles{
+              swal("Error", "You cliked the button!", "error");
+           }
       });
   });
 };
