@@ -27,7 +27,7 @@ window.onload = function() {
 
     // 5. Send email using EmailJS
       emailjs.send("service_76igk3f", "template_juprsho", templateParams);
-      then(function(response) {
+      then(function(response)) {
         alert("Registration submitted successfully!");
         form.reset(); // clear form
         console.log("SUCCESS!", response.status, response.text);
