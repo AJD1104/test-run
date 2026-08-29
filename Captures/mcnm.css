@@ -73,7 +73,18 @@ form .User-details .input-box{
   border-bottom-width: 2px;
   transition: all 0.3s ease;
 }
-
+.User-details .input-box textarea{
+     height: 45px;
+  width: 100%;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding-left: 15px;
+  font-size: 16px;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+   border-color: #9b59b6;
+}
 .User-details .input-box input:focus,
 .User-details .input-box input:valid{
   border-color: #9b59b6;
