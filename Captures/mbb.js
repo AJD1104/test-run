@@ -1,68 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>job applcation form</title>
-    <link rel="stylesheet" href="mcnm.css">
-    
-</head>
-<body>
-    <div class="container">
-        <div class="title"> job application</div>
-        <form action="#">
-            <div class="User-details">
-                <div class="input-box">
-                    <span class="details">Full Name</span>
-                    <input type="text" placeholder="Name..." required>
-                </div>
-                <div class="input-box">
-                    <span class="details">UserName</span>
-                    <input type="text" placeholder="UserName..." required>
-                </div>
-                <div class="input-box">
-                    <span class="details">Email</span>
-                    <input type="text" placeholder="Email..." required>
-                </div>
-                <div class="input-box">
-                    <span class="details">Phone Number</span>
-                    <input type="text" placeholder="Number..." required>
-                </div>
-                <div class="input-box">
-                    <span class="details">Whasapp No</span>
-                    <input type="text" placeholder="Whasapp No..." required>
-                    </div>
-                     <div class="input-box">
-                         <span class="details">Your strents and wekness</span>
-                    <textarea name="text" cols="20" rows="6" placeholder="Your strents and wekness" id="hjk" required></textarea>
+// mbb.js
 
-                </div>
-               
-            </div>
-            <div class="gender-details">
-                <input type="radio" name="gender" id="dot1" required>
-                <input type="radio" name="gender" id="dot2" required>
-                <span class="gender-title">Gender</span>
-                <div class="category">
-                    <label for="dot1">
-                        <span class="dot one"></span>
-                        <span class="gender">Male</span>
-                    </label>
-                    <label for="dot2">
-                        <span class="dot two"></span>
-                        <span class="gender">Female</span>
-                    </label>
-                </div>
-            </div>
-            <div class="button">
-                <input type="submit"  value="submit">
-          
-        </div>
-            <a href="=.html">m</a>
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-            <script src="mbb.js"></script>
-        </form>
-    </div>
-</body>
-</html>
+// 1. Initialize EmailJS with your Public Key
+(function() {
+  emailjs.init("-TDTPVcZLgj_roJcZ"); // <-- replace with your EmailJS public key
+})();
+
+// 2. Attach event listener to the form
+window.onload = function() {
+  const form = document.querySelector("form");
+
+  form.addEventListener("submit", function(event) {
+    event.preventDefault(); // prevent page reload
+
+    // 3. Get selected gender radio button
+    const gender = document.querySelector('input[name="gender"]:checked');
+
+    // 4. Collect all form data
+    const templateParams = {
+      full_name: document.querySelector('input[placeholder="Name..."]').value,
+      username: document.querySelector('input[placeholder="UserName..."]').value,
+      email: document.querySelector('input[placeholder="Email..."]').value,
+      phone: document.querySelector('input[placeholder="Number..."]').value,
+      whatsapp: document.querySelector('input[placeholder="Whasapp No..."]').value, // <-- FIXED
+      your_st: document.querySelector('input[placeholder="Your strents and wekness"]').value,
+      gender: gender ? gender.nextElementSibling.innerText : "" // gets "Male", "Female", "Prefer not to say"
+    };
+
+    // 5. Send email using EmailJS
+      emailjs.send("service_76igk3f", "template_juprsho", templateParams
+      ).then(function(response){
+          if(response.status === 200){
+            Swal.fire({
+  title: "Good job!",
+  text: "You clicked the button!",
+  icon: "success"
+});
+          } else{
+             Swal.fire({
+  icon: "error",
+  title: "Oops...",
+  text: "Something went wrong!",
+  footer: "<a href=\"#\">Why do I have this issue?</a>"
+});
+           }
+      });
+  });
+};
