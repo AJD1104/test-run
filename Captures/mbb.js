@@ -22,7 +22,7 @@ window.onload = function() {
       email: document.querySelector('input[placeholder="Email..."]').value,
       phone: document.querySelector('input[placeholder="Number..."]').value,
       whatsapp: document.querySelector('input[placeholder="Whasapp No..."]').value, // <-- FIXED
-      your_st: document.querySelector('input[placeholder="Your strents and wekness"]').value,
+      your_st: document.querySelector('input[placeholder="Your strents and wekness..."]').value,
       gender: gender ? gender.nextElementSibling.innerText : "" // gets "Male", "Female", "Prefer not to say"
     };
 
