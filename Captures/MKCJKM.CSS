@@ -1,26 +1,116 @@
-body{
+*{
     margin: 0;
-    background: #1a1a2e;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+body{
+     background: linear-gradient( 908deg,#71b7e6,#9b59b6);
+      background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    font-family: arial;
+    min-height: 100vh;
 }
-canvas{
-    background: linear-gradient(to top, #87ceeb 0%, #e0f6ff 100%);
-    border: 3px solid #fff;
-    image-rendering: pixelated;  
+
+.continer{
+    background-color: transparent;
+    width: 25%;
+    height: min-content;
+    padding: 25px;
+    border-radius: 25px;
+    border: 2px solid #000;
+    filter: brightness(90%);
+    animation: shak 2s linear infinite;
+   backdrop-filter: blur(45px);
 }
-#ui{
-    position: absolute;
-    top: 10px;
-    width: 800px;
-    display: flex;
-    justify-content: space-between;
+@keyframes shak{
+    0%{
+        transform: translateY(5px);
+    }
+    25%{
+        transform: translateY(0px);
+    }
+    50%{
+        transform: translateY(-5px);
+    }
+    75%{
+        transform: translateY(0px);
+    }
+    100%{
+        transform: translateY(5px);
+    }
+}
+.continer h1{
+    font-size: 50px;
+    text-transform: capitalize;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #000;
+}
+.continer input{
+    margin-top: 20px;
+    border-radius: 25px;
+    outline: none;
+    border: 1px solid rgb(126, 111, 255);
+    width: 100%;
+    padding: 12px 25px ;
+    border-radius: 25px;
+    margin-top:10px ;
+    border: 1px solid rgb(126, 111, 255);
+    outline: none;
+    box-shadow: 0 0 15px #06818a;
+    font-size: 15px;
+    font-weight: 600;
+}
+textarea{
+    padding : 12px 10px;
+    margin-top: 15px;
+    border: 1px solid rgb(126, 111, 255);
+    width: 100%;
+    border-radius: 5px;
+    outline: none;
+     box-shadow: 0 0 15px #06818a;
+    font-size: 15px;
+    font-weight: 600;
+}
+.continer input::placeholder, textarea::placeholder{
+    color: #000;
+    opacity: 0.7;
+}
+button{
+    width: 100%;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 25px;
+    outline: none;
+    border: none;
+    background:linear-gradient( 908deg,#d65c8b,#595bdf);
+    font-size: 18px;
+    font-weight: 700;
     color: #fff;
-    font-size: 20px;
-    font-weight: bold;
-    text-shadow: 2px 2px 2px #000;
+    box-shadow: 0 0 10px  #000;
+    cursor: pointer;
+}
+button:hover{
+    background:linear-gradient( 360deg,#d65c8b,#595bdf) ;
+    color: #ffffff9a;
+}
+@media  screen and (max-width: 900px) {
+    .continer{
+        width: 40%;
+    }
+}
+@media  screen and (max-width: 700px) {
+    .continer{
+        width: 60%;
+    }
+}
+@media  screen and (max-width: 450px) {
+    .continer{
+        width: 90%;
+    }
 }
