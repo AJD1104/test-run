@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mndmdkd.css">
     <title>Document</title>
 </head>
 <body>
@@ -10,17 +11,18 @@
        <h2>Counter</h2>
         <div id="Number">0</div>
         <div class="btn-group"></div>
-        <button onclick="decrease()">-</button>
+        <button onclick="decrease()"> - </button>
         <button onclick="increase()">+</button>
     </div>
     <form id="counter-form">
         <input type="text" name="Name" placeholder="Name..." required>
-         <input type="email" name="Name" placeholder="Email..." required>
+         <input type="email" name="Email" placeholder="Email..." required>
+         <input type="text" name="category" placeholder="chicken or fish">
           <input type="hidden" name="counter-value" >
           <button type="submit" class="send-btn">submit</button>
     </form>
        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
             <script src="game file.js"></script>
 </body>
 </html>
