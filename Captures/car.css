@@ -20,6 +20,7 @@ header h1 {
   margin: 0;
   letter-spacing: 1px;
 }
+
 header p {
   font-size: 1.1rem;
   opacity: 0.9;
@@ -46,7 +47,11 @@ p:hover {
   transform: translateX(5px);
   background: #1b2330;
 }
-
+.carpics img{
+  height: 500px;
+  width: 350px;
+  
+}
 /* Links */
 a {
   color: #00c6ff;
